@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://5rdd4d641ybe"]
+
+[ext_resource type="PackedScene" uid="uid://drmbmy4g2c8ga" path="res://chair_front_office.blend" id="1_0oveu"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ugm7y"]
+size = Vector3(2.39783, 3.77789, 2.18896)
+
+[node name="chair_front_office" instance=ExtResource("1_0oveu")]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="6"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0663451, 0.0867612, -0.00610349)
+shape = SubResource("BoxShape3D_ugm7y")

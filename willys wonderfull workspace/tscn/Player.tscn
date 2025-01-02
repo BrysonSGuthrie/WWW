@@ -1,0 +1,77 @@
+[gd_scene load_steps=12 format=3 uid="uid://nqi63brno12o"]
+
+[ext_resource type="Script" path="res://character_body_3d.gd" id="1_31o65"]
+[ext_resource type="Shader" path="res://moving clay shder.gdshader" id="2_mpx7d"]
+[ext_resource type="Texture2D" uid="uid://cars2ce2gbh3f" path="res://Screenshot 2024-12-12 141424.png" id="3_wqa3r"]
+[ext_resource type="Texture2D" uid="uid://clws1ootpp87w" path="res://normals.png" id="4_gvadp"]
+[ext_resource type="Texture2D" uid="uid://bqetubf0x0sis" path="res://rough.png" id="5_2xm15"]
+[ext_resource type="Texture2D" uid="uid://bqfr55hj2yf35" path="res://Screenshot (62).png" id="6_3smlg"]
+[ext_resource type="PackedScene" uid="uid://bl450gpk3kv2q" path="res://syringe.tscn" id="7_jaifn"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_5cm2i"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_26urq"]
+render_priority = 0
+shader = ExtResource("2_mpx7d")
+shader_parameter/albedo = Color(0.609304, 0.531132, 0.378957, 1)
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 1.0
+shader_parameter/metallic_texture_channel = null
+shader_parameter/specular = 0.5
+shader_parameter/metallic = 0.0
+shader_parameter/normal_scale = 1.0
+shader_parameter/uv1_scale_texture = 0.73
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+shader_parameter/speed = 0.0
+shader_parameter/step_size = 0.1
+shader_parameter/intensity = 0.15
+shader_parameter/texture_roughness = ExtResource("5_2xm15")
+shader_parameter/texture_normal = ExtResource("4_gvadp")
+shader_parameter/displacement_map = ExtResource("3_wqa3r")
+
+[sub_resource type="BoxMesh" id="BoxMesh_6x4mu"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pv28s"]
+radius = 0.685429
+height = 2.20581
+
+[node name="CharacterBody3D" type="CharacterBody3D"]
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("1_31o65")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_5cm2i")
+surface_material_override/0 = SubResource("ShaderMaterial_26urq")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(0.275, 0, 0, 0, 0.275, 0, 0, 0, 0.275, 4.80905e-08, 0.588519, -0.550092)
+mesh = SubResource("BoxMesh_6x4mu")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_pv28s")
+
+[node name="point" type="Node3D" parent="."]
+transform = Transform3D(3.22581, 0, 0, 0, 3.22581, 0, 0, 0, 3.22581, 0, 0.635219, -2.20784)
+
+[node name="Decal" type="Decal" parent="."]
+transform = Transform3D(0.14, 0, 0, 0, -0.0115225, -0.139525, 0, 0.139525, -0.0115225, 0.000378974, 0.584326, -0.706701)
+size = Vector3(2, 2, 1.87769)
+texture_albedo = ExtResource("6_3smlg")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("CapsuleShape3D_pv28s")
+
+[node name="syringe" parent="." instance=ExtResource("7_jaifn")]
+transform = Transform3D(0.4, 0, 0, 0, -1.74846e-08, 0.4, 0, -0.4, -1.74846e-08, 0, 0.107717, -0.31525)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[connection signal="area_shape_entered" from="Area3D" to="." method="_on_area_3d_area_shape_entered"]

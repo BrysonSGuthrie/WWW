@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://na8ew0e68buf"]
+
+[ext_resource type="PackedScene" uid="uid://x3sit7mgcwno" path="res://front office.blend" id="1_0hhl0"]
+[ext_resource type="Shader" path="res://moving clay shder.gdshader" id="2_4yrbm"]
+[ext_resource type="Texture2D" uid="uid://cars2ce2gbh3f" path="res://Screenshot 2024-12-12 141424.png" id="3_h75w1"]
+[ext_resource type="Texture2D" uid="uid://clws1ootpp87w" path="res://normals.png" id="4_xn4fx"]
+[ext_resource type="Texture2D" uid="uid://bqetubf0x0sis" path="res://rough.png" id="5_0f1rc"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bqqjy"]
+render_priority = 0
+shader = ExtResource("2_4yrbm")
+shader_parameter/albedo = Color(0, 1, 1, 1)
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 0.54
+shader_parameter/metallic_texture_channel = null
+shader_parameter/specular = 1.0
+shader_parameter/metallic = 0.0
+shader_parameter/normal_scale = 1.0
+shader_parameter/uv1_scale_texture = 0.73
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+shader_parameter/speed = 0.6
+shader_parameter/step_size = 0.1
+shader_parameter/intensity = -0.015
+shader_parameter/texture_roughness = ExtResource("5_0f1rc")
+shader_parameter/texture_normal = ExtResource("4_xn4fx")
+shader_parameter/displacement_map = ExtResource("3_h75w1")
+
+[node name="water_fall_front_office" instance=ExtResource("1_0hhl0")]
+
+[node name="Plane" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 0.0174524, -0.999848, 0, 0.999848, 0.0174524, -9.22852e-06, 12.2788, 0.861308)
+
+[node name="Plane_002" parent="." index="1"]
+transform = Transform3D(8.814, 0, 0, 0, -1.54695e-07, -4.784, 0, 3.539, -2.09115e-07, -0.00673318, 9.35295, -3.40989)
+visible = false
+
+[node name="Cube" parent="." index="2"]
+transform = Transform3D(2.55036, 0, 0, 0, 2.55036, 0, 0, 0, 1.46505, 0, 2.63636, -0.459066)
+surface_material_override/0 = SubResource("ShaderMaterial_bqqjy")

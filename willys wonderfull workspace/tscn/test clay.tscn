@@ -1,0 +1,73 @@
+[gd_scene load_steps=11 format=3 uid="uid://wlna2grjt14o"]
+
+[ext_resource type="PackedScene" uid="uid://mnn8v38waop5" path="res://untitled.blend" id="1_88tob"]
+[ext_resource type="Texture2D" uid="uid://bgcy6qbm5cfpd" path="res://icon.svg" id="2_74fvm"]
+[ext_resource type="Script" path="res://test_clay.gd" id="2_a8idp"]
+[ext_resource type="Texture2D" uid="uid://clws1ootpp87w" path="res://normals.png" id="2_lehj8"]
+[ext_resource type="Shader" path="res://moving clay shder.gdshader" id="3_0a7yj"]
+[ext_resource type="Texture2D" uid="uid://bqetubf0x0sis" path="res://rough.png" id="3_0fmms"]
+[ext_resource type="Texture2D" uid="uid://cars2ce2gbh3f" path="res://Screenshot 2024-12-12 141424.png" id="3_x8iqq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bqqjy"]
+render_priority = 0
+shader = ExtResource("3_0a7yj")
+shader_parameter/albedo = Color(0, 1, 1, 1)
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 0.0
+shader_parameter/metallic_texture_channel = null
+shader_parameter/specular = 1.0
+shader_parameter/metallic = 0.0
+shader_parameter/normal_scale = 1.0
+shader_parameter/uv1_scale_texture = 0.73
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+shader_parameter/speed = 0.6
+shader_parameter/step_size = 0.1
+shader_parameter/intensity = -0.015
+shader_parameter/texture_roughness = ExtResource("3_0fmms")
+shader_parameter/texture_normal = ExtResource("2_lehj8")
+shader_parameter/displacement_map = ExtResource("3_x8iqq")
+
+[sub_resource type="SphereMesh" id="SphereMesh_ustfy"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mo8i5"]
+render_priority = 0
+shader = ExtResource("3_0a7yj")
+shader_parameter/albedo = Color(0.609304, 0.531132, 0.378957, 1)
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 1.0
+shader_parameter/metallic_texture_channel = null
+shader_parameter/specular = 0.5
+shader_parameter/metallic = 0.0
+shader_parameter/normal_scale = 1.0
+shader_parameter/uv1_scale_texture = 0.73
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+shader_parameter/speed = 0.6
+shader_parameter/step_size = 0.1
+shader_parameter/intensity = 0.15
+shader_parameter/texture_albedo = ExtResource("2_74fvm")
+shader_parameter/texture_roughness = ExtResource("3_0fmms")
+shader_parameter/texture_normal = ExtResource("2_lehj8")
+shader_parameter/displacement_map = ExtResource("3_x8iqq")
+
+[node name="untitled" instance=ExtResource("1_88tob")]
+script = ExtResource("2_a8idp")
+
+[node name="Sphere_001" parent="." index="0"]
+surface_material_override/0 = SubResource("ShaderMaterial_bqqjy")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="1"]
+transform = Transform3D(-1.11152, 0, -1.66269, 0, 2, 0, 1.66269, 0, -1.11152, -2.92792, 0, 0)
+mesh = SubResource("SphereMesh_ustfy")
+surface_material_override/0 = SubResource("ShaderMaterial_mo8i5")
+
+[node name="Camera3D" type="Camera3D" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.95486, 0, 3.37914)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.20613, -0.478449, 1.46077)
+light_energy = 8.625
+omni_range = 14.2193

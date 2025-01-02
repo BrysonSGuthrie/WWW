@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://bnjufcp01f04l"]
+
+[ext_resource type="Script" path="res://enemy.gd" id="1_3f3dg"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_i2wv8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wfwho"]
+albedo_color = Color(128.498, 0, 0, 1)
+roughness = 0.0
+emission_enabled = true
+emission = Color(1, 0, 0, 1)
+emission_energy_multiplier = 20.8
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gcveb"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_x33oi"]
+radius = 0.685429
+height = 2.20581
+
+[node name="Node3D" type="CharacterBody3D"]
+script = ExtResource("1_3f3dg")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_i2wv8")
+surface_material_override/0 = SubResource("StandardMaterial3D_wfwho")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_gcveb")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("CapsuleShape3D_x33oi")
+
+[connection signal="area_shape_entered" from="Area3D" to="." method="_on_area_3d_area_shape_entered"]

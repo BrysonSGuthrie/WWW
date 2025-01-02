@@ -1,0 +1,56 @@
+[gd_scene load_steps=9 format=3 uid="uid://bl450gpk3kv2q"]
+
+[ext_resource type="PackedScene" uid="uid://cfjiep8c1mqyk" path="res://syringe.blend" id="1_chuhh"]
+[ext_resource type="Script" path="res://syringe.gd" id="2_44ppm"]
+[ext_resource type="Shader" uid="uid://ceg5bl6g3rncy" path="res://syringe liquid.tres" id="2_wm5ah"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_52b2k"]
+transparency = 1
+albedo_color = Color(0.877616, 0.877616, 0.877616, 0.4)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rqqjf"]
+albedo_color = Color(0.482353, 0.164706, 0.164706, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_03vwg"]
+albedo_color = Color(0.753984, 0.753984, 0.753984, 1)
+metallic = 1.0
+metallic_specular = 0.0
+roughness = 0.4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tmmhd"]
+albedo_color = Color(0, 0, 0, 1)
+roughness = 0.37
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x6b43"]
+render_priority = 0
+shader = ExtResource("2_wm5ah")
+shader_parameter/albedo = Color(0.482353, 0.164706, 0.164706, 1)
+shader_parameter/point_size = null
+shader_parameter/roughness = null
+shader_parameter/metallic_texture_channel = null
+shader_parameter/specular = null
+shader_parameter/metallic = null
+shader_parameter/uv1_scale = null
+shader_parameter/uv1_offset = null
+shader_parameter/uv2_scale = null
+shader_parameter/uv2_offset = null
+shader_parameter/liquid_hight = 8.18
+
+[node name="syringe" instance=ExtResource("1_chuhh")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
+script = ExtResource("2_44ppm")
+
+[node name="Plane" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_52b2k")
+surface_material_override/1 = SubResource("StandardMaterial3D_rqqjf")
+surface_material_override/2 = SubResource("StandardMaterial3D_03vwg")
+surface_material_override/3 = SubResource("StandardMaterial3D_52b2k")
+
+[node name="Plane_001" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.91743e-09, 2.29772, -1.77886e-08)
+surface_material_override/0 = SubResource("StandardMaterial3D_52b2k")
+surface_material_override/1 = SubResource("StandardMaterial3D_tmmhd")
+
+[node name="Cylinder" parent="." index="2"]
+transform = Transform3D(0.142494, 0, 0, 0, 0.00473852, 0, 0, 0, 0.142494, 5.73993e-05, 5.44398, -0.00105906)
+surface_material_override/0 = SubResource("ShaderMaterial_x6b43")
